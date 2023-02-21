@@ -1,5 +1,3 @@
-
-
 # Functions
 def yes_no(question):
     valid = False
@@ -15,12 +13,14 @@ def yes_no(question):
         else:
             print("Please answer yes / no")
 
+
 def instructions():
     print("------ Instructions -------")
     print()
     print("Rules")
     print()
-    return""
+    return ""
+
 
 # Main Routine
 
