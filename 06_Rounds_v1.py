@@ -18,8 +18,8 @@ while play_again == "":
     if balance < 1:
         play_again = "xxx"
         print("Sorry you have ran out of points")
-
-    play_again = input("Press <Enter> to replay or 'xxx' to quit")
+    else:
+        play_again = input("Press <Enter> to replay or 'xxx' to quit ")
 
 print()
 print("Final Balance", balance)

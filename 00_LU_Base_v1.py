@@ -1,3 +1,6 @@
+import random
+
+
 # Functions
 def yes_no(question):
     valid = False
@@ -15,10 +18,25 @@ def yes_no(question):
 
 
 def instructions():
+    print("---------------------------")
     print("------ Instructions -------")
+    print("---------------------------")
     print()
-    print("Rules")
     print()
+    print("Pick an amount from 1 to 10 points")
+    print()
+    print("By pressing <enter> the game will start. "
+          "You will get a horse, zebra, donkey, or unicorn")
+    print()
+    print("It takes 1 point per each round. "
+          "You have the chance to win some money each round")
+    print("Here is the tokens values:")
+    print("- Unicorn: 5.0 points (balance increases by 4)")
+    print("- Donkey: 0.0 points (balance decreases by 1)")
+    print("- Horse: 0.5 points (balance decreases by 0.5)")
+    print("- Zebra: 0.5 points (balance decreases by 0.5)")
+    print()
+
     return ""
 
 
@@ -43,7 +61,22 @@ def num_check(question, low, high):
             print(error)
 
 
+def statement_generator(statement, decoration):
+
+    sides = decoration * 3
+
+    statement = "{} {} {}".format(sides, statement, sides)
+    top_bottom = decoration * len(statement)
+
+    print(top_bottom)
+    print(statement)
+    print(top_bottom)
+
+    return ""
+
+
 # Main Routine
+statement_generator("Welcome to Lucky Unicorn game", "*")
 played_before = yes_no("Have you played the game before? ")
 
 if played_before == "no":
@@ -53,3 +86,54 @@ if played_before == "no":
 how_much = num_check("How much would you like to play with? ", 0, 10)
 
 print("You will be spending {} points".format(how_much))
+
+balance = how_much
+
+rounds_played = 0
+
+play_again = input("Press <Enter> to play.").lower()
+while play_again == "":
+
+    # increases # of rounds played
+    rounds_played += 1
+
+    # Prints round number
+    print()
+    statement_generator("Round #{}".format(rounds_played), "#".format(rounds_played))
+    print()
+
+    chosen_num = random.randint(1, 100)
+
+    # Adjust balance
+    # if random # is between 1 and 5
+    # user gets unicorn (4 is added to balance)
+    if 1 <= chosen_num <= 5:
+        chosen = "unicorn"
+        balance += 4
+    # if random # is between 6 and 37
+    # user gets donkey (1 is subtracted from balance)
+    elif 6 <= chosen_num <= 37:
+        chosen = "donkey"
+        balance -= 1
+    else:
+        # if random # is between 38 and 69
+        # user gets horse (0.5 is subtracted from the balance)
+        if 38 <= chosen_num <= 69:
+            chosen = "horse"
+        # if random # has not yet been pulled
+        # user gets zebra (0.5 is subtracted from the balance)
+        else:
+            chosen = "zebra"
+        balance -= 0.5
+
+    statement_generator("You got {} Your balance is {}".format(chosen, balance), "=")
+    print()
+
+    if balance < 1:
+        play_again = "xxx"
+        print("Sorry you have ran out of points")
+    else:
+        play_again = input("Press <Enter> to replay or 'xxx' to quit")
+
+print()
+statement_generator("Final Balance {}".format(balance), "-")
