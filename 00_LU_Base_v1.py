@@ -133,7 +133,8 @@ while play_again == "":
         play_again = "xxx"
         print("Sorry you have ran out of points")
     else:
-        play_again = input("Press <Enter> to replay or 'xxx' to quit")
+        play_again = input("Press <Enter> to replay or 'xxx' to quit ")
 
 print()
+statement_generator("Starting Balance {}".format(how_much), "-")
 statement_generator("Final Balance {}".format(balance), "-")
