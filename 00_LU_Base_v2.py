@@ -23,18 +23,18 @@ def instructions():
     print("---------------------------")
     print()
     print()
-    print("Pick an amount from 1 to 10 points")
+    print("Pick an amount from $1.00 to $10.00")
     print()
     print("By pressing <enter> the game will start. "
           "You will get a horse, zebra, donkey, or unicorn")
     print()
-    print("It takes 1 point per each round. "
+    print("It takes $1.00 per each round. "
           "You have the chance to win some money each round")
     print("Here is the tokens values:")
-    print("- Unicorn: 5.0 points (balance increases by 4)")
-    print("- Donkey: 0.0 points (balance decreases by 1)")
-    print("- Horse: 0.5 points (balance decreases by 0.5)")
-    print("- Zebra: 0.5 points (balance decreases by 0.5)")
+    print("- Unicorn: $5.00 (balance increases by $4.00)")
+    print("- Donkey: $1.00 (balance decreases by $1.00)")
+    print("- Horse: $0.50 (balance decreases by $0.50)")
+    print("- Zebra: $0.50 (balance decreases by $0.50)")
     print()
 
     return ""
@@ -85,7 +85,7 @@ if played_before == "no":
 # Asks how many points they want to use
 how_much = num_check("How much would you like to play with? ", 0, 10)
 
-print("You will be spending {} points".format(how_much))
+print(f'You will be spending ${how_much:.2f}')
 
 balance = how_much
 
@@ -99,7 +99,7 @@ while play_again == "":
 
     # Prints round number
     print()
-    statement_generator("Round #{}".format(rounds_played), "#".format(rounds_played))
+    statement_generator(f'Round #{rounds_played}', "#")
     print()
 
     chosen_num = random.randint(1, 100)
@@ -126,15 +126,16 @@ while play_again == "":
             chosen = "zebra"
         balance -= 0.5
 
-    statement_generator("You got {}. Your balance is {}".format(chosen, balance), "=")
+    statement_generator(f'You got {chosen}. Your balance is ${balance:.2f}', "=")
     print()
 
     if balance < 1:
         play_again = "xxx"
-        print("Sorry you have ran out of points")
+        print("Sorry you have ran out of money")
     else:
         play_again = input("Press <Enter> to replay or 'xxx' to quit ")
 
 print()
-statement_generator("Starting Balance {}".format(how_much), "-")
-statement_generator("Final Balance {}".format(balance), "-")
+statement_generator(f'Starting Balance {how_much:.2f}', "-")
+statement_generator(f'Final Balance {balance:.2f}', "-")
+
